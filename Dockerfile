@@ -66,7 +66,8 @@ RUN a2enconf server-name && \
     a2enconf html && \
     a2enconf logging && \
     a2enconf cgi-bin && \
-    a2enconf error-log
+    a2enconf error-log && \
+    a2enconf security
 
 # Clean apt cache
 
