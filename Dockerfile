@@ -1,5 +1,5 @@
 # Latest Ubuntu LTS
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER  Erik Osterman "e@osterman.com"
 
@@ -32,7 +32,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Update the package repository
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y wget curl locales apache2 apache2-mpm-worker m4 && \
+    apt-get install -y wget curl locales apache2 tzdata m4 && \
     apt-get clean
 
 # Locale specific
@@ -46,9 +46,7 @@ RUN locale-gen $LANGUAGE && \
     echo "$TIMEZONE" > /etc/timezone && \
     dpkg-reconfigure -f noninteractive tzdata
 
-ADD start /start
-ADD conf-available/ /etc/apache2/conf-available/
-ADD mods-available/ /etc/apache2/mods-available/
+ADD rootfs /
 
 # Activate modules & configurations
 RUN a2enconf server-name && \
